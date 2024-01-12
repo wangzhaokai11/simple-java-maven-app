@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'docker.desaysv.com/ici2/tools/maven-edoc:20240112'
+            image 'docker.desaysv.com/ici2/tools/maven:20240109-latest'
             args '-v /root/.m2:/root/.m2'
         }
     }
