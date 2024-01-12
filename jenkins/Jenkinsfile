@@ -7,8 +7,6 @@ pipeline {
     }
     environment {
         CI = 'true'
-        PROJECT_NAME = "${JOB_NAME}".replaceAll("/", "-")  // 获取项目名称，并替换 "/" 为 "-"
-        BUILD_NUMBER = "${BUILD_NUMBER}"  // 获取构建次数
     }
     stages {
         stage("Clone code from github") {
@@ -21,7 +19,7 @@ pipeline {
         stage("Maven Build") {
             steps {
                 script {
-                    sh "mvn package -DskipTests=true -Djar.finalName=${PROJECT_NAME}-${BUILD_NUMBER}"
+                    sh "mvn package -DskipTests=true"
                     archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
 
                 }
