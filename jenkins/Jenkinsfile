@@ -31,7 +31,7 @@ pipeline {
                     sh "tar -zxvf edoc.tar.gz"
                     sh "cd edoc/"
                     sh "ls"
-                    sh "./pipeline-edoc.sh wangzkjenkins 1377062 /var/jenkins_home/workspace/demo1_master/target/my-app-1.0-SNAPSHOT.jar /var/jenkins_home/workspace/demo1_master/"
+                    // sh "./pipeline-edoc.sh wangzkjenkins 1377062 /var/jenkins_home/workspace/demo1_master/target/my-app-1.0-SNAPSHOT.jar /var/jenkins_home/workspace/demo1_master/"
                 }
             }
         }
