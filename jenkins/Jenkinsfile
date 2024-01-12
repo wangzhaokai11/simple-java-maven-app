@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'docker.desaysv.com/ici2/tools/maven:20240109-latest'
+            image 'docker.desaysv.com/ici2/tools/maven-edoc:20240112'
             args '-v /root/.m2:/root/.m2'
         }
     }
@@ -20,7 +20,6 @@ pipeline {
             steps {
                 script {
                     sh "mvn package -DskipTests=true"
-                    // sh "cp /var/jenkins_home/workspace/demo1_master/target/my-app-1.0-SNAPSHOT.jar "
                 }
             }
         }
@@ -28,8 +27,9 @@ pipeline {
             steps {
                 script {
                     echo '执行edoc上传'
-                    // 在docker容器中运行pipeline-edoc.sh脚本
-                    sh "docker run -v /root/.m2:/root/.m2 docker.desaysv.com/ici2/tools/maven-edoc:20240112 ./pipeline-edoc.sh"
+                    sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                    sh "tar -zxvf edoc.tar.gz"
+                    sh "./pipeline-edc.sh"
                 }
             }
         }
