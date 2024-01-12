@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     sh "mvn package -DskipTests=true"
-                       "pwd"
+                    sh "pwd"
                 }
             }
         }
