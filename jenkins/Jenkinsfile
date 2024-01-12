@@ -20,8 +20,7 @@ pipeline {
             steps {
                 script {
                     sh "mvn package -DskipTests=true"
-                    // 将产物（Jar包）放入stash
-                    stash includes: 'target/*.jar', name: 'myStash'
+                    // sh "cp /var/jenkins_home/workspace/demo1_master/target/my-app-1.0-SNAPSHOT.jar "
                 }
             }
         }
@@ -29,12 +28,7 @@ pipeline {
             steps {
                 script {
                     echo '执行edoc上传'
-                    // 在这里可以使用unstash将产物取出并使用
-                    unstash 'myStash'
-                    // 假设Jar包的名称是simple-java-maven-app.jar
-                    def jarPath = sh(script: 'find ${WORKSPACE} -name "simple-java-maven-app.jar"', returnStdout: true).trim()
-                    echo "Jar Path in Publish Stage: ${jarPath}"
-                    // 在这里可以执行上传操作，使用${jarPath}作为路径
+                    ./pipeline-edoc.sh
                 }
             }
         }
