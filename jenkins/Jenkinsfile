@@ -7,17 +7,12 @@ pipeline {
     }
     environment {
         CI = 'true'
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "10.219.66.21:8081"
-        NEXUS_REPOSITORY = "maven-releases"
-        NEXUS_CREDENTIAL_ID = "nexus"
     }
     stages {
         stage("Clone code from github") {
             steps {
                 script {
-                  git  credentialsId: 'wangzhaokai', url: 'git@github.com:wangzhaokai11/simple-java-maven-app.git'
+                    git  credentialsId: 'wangzhaokai', url: 'git@github.com:wangzhaokai11/simple-java-maven-app.git'
                 }
             }
         }
@@ -25,7 +20,8 @@ pipeline {
             steps {
                 script {
                     sh "mvn package -DskipTests=true"
-                    sh "pwd"
+                    // 将产物（Jar包）放入stash
+                    stash includes: 'target/*.jar', name: 'myStash'
                 }
             }
         }
@@ -33,6 +29,12 @@ pipeline {
             steps {
                 script {
                     echo '执行edoc上传'
+                    // 在这里可以使用unstash将产物取出并使用
+                    unstash 'myStash'
+                    // 假设Jar包的名称是simple-java-maven-app.jar
+                    def jarPath = sh(script: 'find ${WORKSPACE} -name "simple-java-maven-app.jar"', returnStdout: true).trim()
+                    echo "Jar Path in Publish Stage: ${jarPath}"
+                    // 在这里可以执行上传操作，使用${jarPath}作为路径
                 }
             }
         }
