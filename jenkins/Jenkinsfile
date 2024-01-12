@@ -70,7 +70,7 @@ pipeline {
                     
                 }
 
-                    }   }
+                    }   }}
     post {
         always {
             // 生成构建时长表格
@@ -93,5 +93,4 @@ pipeline {
             echo table
         }             
             }
-}
 }
