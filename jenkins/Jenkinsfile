@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     echo '执行edoc上传'
-                    ./pipeline-edoc.sh
+                    sh "./pipeline-edoc.sh"
                 }
             }
         }
