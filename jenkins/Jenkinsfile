@@ -29,9 +29,10 @@ pipeline {
                     echo '执行edoc上传'
                     sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     sh "tar -zxvf edoc.tar.gz"
-                    sh "cd edoc/"
+                    dir('edoc'){
                     sh "ls"
                     // sh "./pipeline-edoc.sh wangzkjenkins 1377062 /var/jenkins_home/workspace/demo1_master/target/my-app-1.0-SNAPSHOT.jar /var/jenkins_home/workspace/demo1_master/"
+                               }
                 }
             }
         }
