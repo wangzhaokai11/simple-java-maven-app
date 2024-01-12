@@ -62,8 +62,8 @@ pipeline {
                         }
                         }}
                 stage("并行执行") {
-                    timestamps {
-                        steps {
+                    steps {
+                        timestamps {
                             echo "这是一个并行执行阶段"
                     }
                     }
