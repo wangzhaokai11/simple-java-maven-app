@@ -85,6 +85,7 @@ pipeline {
                     def duration = currentBuild.rawBuild.getDurationString()
                     table += "${stageName}\t${duration}\n"
                 }
+                return table
             }
             // 将表格写入文件
             writeFile file: 'build_duration_table.txt', text: table
