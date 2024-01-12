@@ -18,7 +18,7 @@ pipeline {
                 }
                 
             }
-        }}
+        }
         stage("Maven Build") {
             steps {
                 timestamps {
@@ -56,7 +56,7 @@ pipeline {
 
                                     dir('edoc'){
                                          sh "ls"
-                                        // sh "./pipeline-edoc.sh wangzkjenkins 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
+                                         sh "./pipeline-edoc.sh wangzkjenkins 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
                                }
                 }
                         }
@@ -70,7 +70,7 @@ pipeline {
                     
                 }
 
-                    }   
+                    }   }
     post {
         always {
             // 生成构建时长表格
