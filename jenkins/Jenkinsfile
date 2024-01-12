@@ -31,8 +31,10 @@ pipeline {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
               }
             }
-            steps {
-                script {
+            parallel {
+                stage("edoc执行") {
+                    steps {
+                        script {
 
                     // echo '执行edoc上传'
                     def tarFile = "./edoc.tar.gz"
@@ -49,6 +51,16 @@ pipeline {
                     sh "./pipeline-edoc.sh wangzkjenkins 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
                                }
                 }
+                stage("并行执行") {
+                    steps {
+                        echo "这是一个并行执行阶段"
+                    }
+                }
+
+                    }
+                    
+                }
+                
             }
         }
     }
