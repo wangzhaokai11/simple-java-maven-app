@@ -11,18 +11,25 @@ pipeline {
     stages {
         stage("Clone code from github") {
             steps {
-                script {
-                    git  credentialsId: 'wangzhaokai', url: 'git@github.com:wangzhaokai11/simple-java-maven-app.git'
+                timestamps {
+                    script {
+                        git  credentialsId: 'wangzhaokai', url: 'git@github.com:wangzhaokai11/simple-java-maven-app.git'
                 }
+                }
+                
             }
-        }
+        }}
         stage("Maven Build") {
             steps {
-                script {
-                    sh "mvn package -DskipTests=true"
-                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+                timestamps {
+                    script {
+                        sh "mvn package -DskipTests=true"
+                        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
 
                 }
+
+                }
+                
             }
         }
         stage("Publish to Edoc Repository Manager") {
@@ -34,33 +41,57 @@ pipeline {
             parallel {
                 stage("edoc执行") {
                     steps {
-                        script {
+                        timestamps {
+                            script {
 
                     // echo '执行edoc上传'
-                    def tarFile = "./edoc.tar.gz"
-                    def downloadNeeded = !fileExists(tarFile)
+                                def tarFile = "./edoc.tar.gz"
+                                def downloadNeeded = !fileExists(tarFile)
 
                     // 如果文件不存在，则下载
-                    if (downloadNeeded) {
-                        sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                                 if (downloadNeeded) {
+                                    sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     }
-                    sh "tar -zxvf edoc.tar.gz"
+                                    sh "tar -zxvf edoc.tar.gz"
 
-                    dir('edoc'){
-                    sh "ls"
-                    sh "./pipeline-edoc.sh wangzkjenkins 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
+                                    dir('edoc'){
+                                         sh "ls"
+                                         sh "./pipeline-edoc.sh wangzkjenkins 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
                                }
-                }}}
-                stage("并行执行") {
-                    steps {
-                        echo "这是一个并行执行阶段"
-                    }
                 }
-
+                        }
+                        }}
+                stage("并行执行") {
+                    timestamps {
+                        steps {
+                            echo "这是一个并行执行阶段"
+                    }
                     }
                     
-                
-                
+                }
+
+                    }   
+    post {
+        always {
+            // 生成构建时长表格
+            echo '构建时长统计表格:'
+            echo 'Stage\t时长'
+            echo '-----\t-----'
+            script {
+                def stages = currentBuild.rawBuild.getCauses().findAll { it instanceof hudson.model.Cause$UpstreamCause }*.shortDescription
+
+                for (int i = 0; i < stages.size(); i++) {
+                    def stageName = stages[i]
+                    def duration = currentBuild.rawBuild.getDurationString()
+                    table += "${stageName}\t${duration}\n"
+                }
             }
-        }
-    }
+            // 将表格写入文件
+            writeFile file: 'build_duration_table.txt', text: table
+
+            // 输出表格内容
+            echo table
+        }             
+            }
+}
+    
