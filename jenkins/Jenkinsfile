@@ -50,7 +50,7 @@ pipeline {
                     sh "ls"
                     sh "./pipeline-edoc.sh wangzkjenkins 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
                                }
-                }
+                }}}
                 stage("并行执行") {
                     steps {
                         echo "这是一个并行执行阶段"
@@ -59,9 +59,8 @@ pipeline {
 
                     }
                     
-                }
+                
                 
             }
         }
     }
-}
