@@ -28,7 +28,8 @@ pipeline {
             steps {
                 script {
                     echo '执行edoc上传'
-                    sh "./pipeline-edoc.sh"
+                    // 在docker容器中运行pipeline-edoc.sh脚本
+                    sh "docker run -v /root/.m2:/root/.m2 docker.desaysv.com/ici2/tools/maven-edoc:20240112 ./pipeline-edoc.sh"
                 }
             }
         }
