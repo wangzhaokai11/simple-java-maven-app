@@ -20,13 +20,21 @@ pipeline {
             steps {
                 script {
                     sh "mvn package -DskipTests=true"
+                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+
                 }
             }
         }
-        stage("Publish to Nexus Repository Manager") {
+        stage("Publish to Edoc Repository Manager") {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
             steps {
                 script {
-                    echo '执行edoc上传'
+
+                    // echo '执行edoc上传'
                     def tarFile = "./edoc.tar.gz"
                     def downloadNeeded = !fileExists(tarFile)
 
@@ -35,10 +43,10 @@ pipeline {
                         sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     }
                     sh "tar -zxvf edoc.tar.gz"
+
                     dir('edoc'){
                     sh "ls"
-                    echo "${env.WORKSPACE} ${env.JOB_NAME}"
-                    // sh "./pipeline-edoc.sh wangzkjenkins 1377062 /var/jenkins_home/workspace/demo1_master/target/my-app-1.0-SNAPSHOT.jar /var/jenkins_home/workspace/demo1_master/"
+                    sh "./pipeline-edoc.sh wangzkjenkins 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
                                }
                 }
             }
