@@ -36,25 +36,27 @@ pipeline {
                     steps {
                         script {
                     // echo '执行edoc上传'
-                    def tarFile = "./edoc.tar.gz"
-                    def downloadNeeded = !fileExists(tarFile)
+                            def tarFile = "./edoc.tar.gz"
+                            def downloadNeeded = !fileExists(tarFile)
 
                     // 如果文件不存在，则下载
-                    if (downloadNeeded) {
-                        sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                            if (downloadNeeded) {
+                                sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     }
-                    sh "tar -zxvf edoc.tar.gz"
+                            sh "tar -zxvf edoc.tar.gz"
 
-                    dir('edoc'){
-                    sh "ls"
+                            dir('edoc'){
+                            sh "ls"
                     // sh "./pipeline-edoc.sh jenkins222 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
-                    sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
+                            sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
                                }
                 }}}
                 stage("并行执行") {
                     steps {
-                        echo "这是一个并行执行阶段"
+                        script {echo "这是一个并行执行阶段"
                         sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
+                        }
+                        
                         
                     }
                 }
