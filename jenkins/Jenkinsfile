@@ -61,5 +61,13 @@ pipeline {
 
                     }
             }
+          stage("Finish") {
+              steps {
+                script {
+                    echo "流水线执行完成"
+
+                }
+            }
+          }
         }
     }
