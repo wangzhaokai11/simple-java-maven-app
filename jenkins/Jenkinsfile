@@ -47,13 +47,14 @@ pipeline {
 
                     dir('edoc'){
                     sh "ls"
-                    sh "./pipeline-edoc.sh jenkins222 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
+                    // sh "./pipeline-edoc.sh jenkins222 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
+                    sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
                                }
                 }}}
                 stage("并行执行") {
                     steps {
-                        sleep 25
                         echo "这是一个并行执行阶段"
+                        sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
                         
                     }
                 }
