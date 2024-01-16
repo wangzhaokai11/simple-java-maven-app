@@ -54,6 +54,7 @@ pipeline {
                 stage("并行执行") {
                     steps {
                         echo "这是一个并行执行阶段"
+                        sleep 25
                     }
                 }
 
