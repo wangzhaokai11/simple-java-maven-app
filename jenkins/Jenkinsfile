@@ -46,7 +46,8 @@ pipeline {
                             sh "tar -zxvf edoc.tar.gz"
 
                             dir('edoc'){
-                            sh "ls"
+                            sh "ls -l"
+                            sh "chmod +x pipeline-edoc.sh"
                     // sh "./pipeline-edoc.sh jenkins222 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
                                 sh "./pipeline-edoc.sh jenkins0117 1377058 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar"
                             //sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
