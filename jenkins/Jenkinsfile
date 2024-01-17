@@ -16,7 +16,7 @@ pipeline {
                 }
             }
         }
-        stage("Compile Build") {
+        stage("Compile Build-1") {
             parallel {
                 stage("cpile-parallel-1") {
                     steps {
@@ -37,19 +37,19 @@ pipeline {
                         sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.tar.gz"
                     }
                 }
-                stage("Compile Build-1") {
+                stage("cpile-parallel-4") {
                     steps {
                         echo "This is a non-parallel stage in Compile Build-1"
                         sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
                     }
                 }
-                stage("Compile Build-3") {
+                stage("cpile-parallel-5") {
                     steps {
                         echo "This is a non-parallel stage in Compile Build-3"
                         sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
                     }
                 }
-                stage("Compile Build-4") {
+                stage("Ccpile-parallel-6") {
                     steps {
                         echo "This is a non-parallel stage in Compile Build-4"
                         sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip"
@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        stage("Compile Build-5") {
+        stage("Compile Build-2") {
             steps {
                 script {
                     sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
