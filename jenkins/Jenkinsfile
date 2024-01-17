@@ -17,8 +17,11 @@ pipeline {
             }
         }
         stage("Compile Build") {
+            steps {
+                echo "This is a non-parallel stage in Compile Build"
+            }
             parallel {
-                stage("Parallel Build 1") {
+                stage("cpile-parallel-1") {
                     steps {
                         sh "mvn package -DskipTests=true"
                         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
@@ -26,7 +29,7 @@ pipeline {
                             
                         }
                 
-                stage("Parallel Build 2") {
+                stage("cpile-parallel-2") {
                     steps {
                          sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     }
