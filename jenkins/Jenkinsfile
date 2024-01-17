@@ -45,7 +45,7 @@ pipeline {
                     }
                             sh "tar -zxvf edoc.tar.gz"
 
-                            dir('edoc'){
+                            dir('edoc-new'){
                             sh "ls -l"
                     // sh "./pipeline-edoc.sh jenkins222 1377062 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
                                 sh "./pipeline-edoc.sh jenkins0117 1377058 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar"
