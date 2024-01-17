@@ -16,29 +16,43 @@ pipeline {
                 }
             }
         }
+        stage("Compile Build") {
+            steps {
+                echo "This is a non-parallel stage in Compile Build"
+                // 第一个步骤
+                sh "mvn package -DskipTests=true"
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+                // 第二个步骤
+                echo "This is another non-parallel stage in Compile Build"
+                sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                // 第三个步骤
+                echo "This is yet another non-parallel stage in Compile Build"
+                sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.tar.gz"
+                // 更多步骤...
+            }
+        }
         stage("Compile Build-1") {
             parallel {
                 stage("cpile-parallel-1") {
                     steps {
                         echo "This is a non-parallel stage in cpile-parallel-1"
-                        sh "mvn package -DskipTests=true"
-                        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                        // 此处添加相应的步骤
                     }
                 }
                 stage("cpile-parallel-2") {
                     steps {
                         echo "This is a non-parallel stage in cpile-parallel-2"
-                        sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                        // 此处添加相应的步骤
                     }
                 }
-                // Add more parallel stages as needed
+                // 更多并行步骤...
             }
         }
         stage("Compile Build-2") {
             steps {
                 script {
                     echo "This is a non-parallel stage in Compile Build-2"
-                    sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
+                    // 此处添加相应的步骤
                 }
             }
         }
@@ -53,26 +67,15 @@ pipeline {
                     steps {
                         script {
                             echo "This is a non-parallel stage in edoc执行"
-                            def tarFile = "./edoc.tar.gz"
-                            def downloadNeeded = !fileExists(tarFile)
-
-                            if (downloadNeeded) {
-                                sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
-                            }
-                            sh "tar -zxvf edoc.tar.gz"
-
-                            dir('edoc-new') {
-                                sh "ls -l"
-                                // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
-                            }
+                            // 此处添加相应的步骤
                         }
                     }
                 }
                 stage("并行执行") {
                     steps {
                         script {
-                            echo "这是一个并行执行阶段"
-                            // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
+                            echo "This is a non-parallel stage in 并行执行"
+                            // 此处添加相应的步骤
                         }
                     }
                 }
