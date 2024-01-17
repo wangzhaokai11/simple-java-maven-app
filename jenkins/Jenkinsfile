@@ -57,6 +57,13 @@ pipeline {
                 }
             }
         }
+        stage("Compile Build-5") {
+            steps {
+                script {
+                    sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
+                }
+            }
+        }
         stage("Publish to Edoc Repository Manager") {
             when {
                 expression {
