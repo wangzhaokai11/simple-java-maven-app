@@ -43,6 +43,12 @@ pipeline {
                         sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
                     }
                 }
+                stage("Compile Build-4") {
+                    steps {
+                        echo "This is a non-parallel stage in Compile Build-4"
+                        sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip"
+                    }
+                }
             }
         }
         stage("Publish to Edoc Repository Manager") {
