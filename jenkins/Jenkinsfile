@@ -12,82 +12,80 @@ pipeline {
         stage("Clone code from github") {
             steps {
                 script {
-                    git  credentialsId: 'wangzhaokai', url: 'git@github.com:wangzhaokai11/simple-java-maven-app.git'
+                    git credentialsId: 'wangzhaokai', url: 'git@github.com:wangzhaokai11/simple-java-maven-app.git'
                 }
             }
         }
         stage("Compile Build") {
-            steps {
-                echo "This is a non-parallel stage in Compile Build"
-            }
             parallel {
                 stage("cpile-parallel-1") {
                     steps {
+                        echo "This is a non-parallel stage in cpile-parallel-1"
                         sh "mvn package -DskipTests=true"
-                        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+                        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
                     }
-                            
-                        }
-                
+                }
                 stage("cpile-parallel-2") {
                     steps {
-                         sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                        echo "This is a non-parallel stage in cpile-parallel-2"
+                        sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     }
-                           
-                        }
-                    
-        }}
-            
-                
-
-
+                }
+                stage("Compile Build-1") {
+                    steps {
+                        echo "This is a non-parallel stage in Compile Build-1"
+                        sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
+                    }
+                }
+                stage("Compile Build-3") {
+                    steps {
+                        echo "This is a non-parallel stage in Compile Build-3"
+                        sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
+                    }
+                }
+            }
+        }
         stage("Publish to Edoc Repository Manager") {
             when {
-              expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-              }
+                expression {
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
             }
             parallel {
                 stage("edoc执行") {
                     steps {
                         script {
-                    // echo '执行edoc上传'
                             def tarFile = "./edoc.tar.gz"
                             def downloadNeeded = !fileExists(tarFile)
 
-                    // 如果文件不存在，则下载
                             if (downloadNeeded) {
                                 sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
-                    }
+                            }
                             sh "tar -zxvf edoc.tar.gz"
 
-                            dir('edoc-new'){
-                            sh "ls -l"
-                           // sh "./pipeline-edoc.sh jenkins0117 1377058 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
-                            sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
-                               }
-                }}}
+                            dir('edoc-new') {
+                                sh "ls -l"
+                              //  sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
+                            }
+                        }
+                    }
+                }
                 stage("并行执行") {
                     steps {
                         script {
                             echo "这是一个并行执行阶段"
-                        sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
+                           // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
                         }
-                        
-                        
                     }
                 }
-
-                    }
             }
-          stage("Finish") {
-              steps {
+        }
+        stage("Finish") {
+            steps {
                 script {
                     echo "流水线执行完成"
-
                 }
             }
-          }
-        
+        }
     }
-    }
+}
