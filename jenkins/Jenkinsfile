@@ -31,35 +31,13 @@ pipeline {
                         sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     }
                 }
-                stage("cpile-parallel-3") {
-                    steps {
-                        echo "This is a non-parallel stage in cpile-parallel-2"
-                        sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.tar.gz"
-                    }
-                }
-                stage("cpile-parallel-4") {
-                    steps {
-                        echo "This is a non-parallel stage in Compile Build-1"
-                        sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
-                    }
-                }
-                stage("cpile-parallel-5") {
-                    steps {
-                        echo "This is a non-parallel stage in Compile Build-3"
-                        sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
-                    }
-                }
-                stage("cpile-parallel-6") {
-                    steps {
-                        echo "This is a non-parallel stage in Compile Build-4"
-                        sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip"
-                    }
-                }
+                // Add more parallel stages as needed
             }
         }
         stage("Compile Build-2") {
             steps {
                 script {
+                    echo "This is a non-parallel stage in Compile Build-2"
                     sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
                 }
             }
@@ -74,6 +52,7 @@ pipeline {
                 stage("edoc执行") {
                     steps {
                         script {
+                            echo "This is a non-parallel stage in edoc执行"
                             def tarFile = "./edoc.tar.gz"
                             def downloadNeeded = !fileExists(tarFile)
 
@@ -84,7 +63,7 @@ pipeline {
 
                             dir('edoc-new') {
                                 sh "ls -l"
-                              //  sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
+                                // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
                             }
                         }
                     }
@@ -93,7 +72,7 @@ pipeline {
                     steps {
                         script {
                             echo "这是一个并行执行阶段"
-                           // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
+                            // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
                         }
                     }
                 }
