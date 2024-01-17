@@ -17,11 +17,22 @@ pipeline {
             }
         }
         stage("Compile Build") {
-            steps {
-                script {
-                    sh "mvn package -DskipTests=true"
-                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+            parallel {
+                stage("Parallel Build 1") {
+                    steps {
+                        script {
+                            sh "mvn package -DskipTests=true"
+                            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+                        }
+                    }
+                }
 
+                stage("Parallel Build 2") {
+                    steps {
+                        script {
+                            sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                        }
+                    }
                 }
             }
         }
