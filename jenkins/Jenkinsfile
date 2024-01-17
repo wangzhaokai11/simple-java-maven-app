@@ -21,15 +21,14 @@ pipeline {
                 "Parallel Build 1": {
                             sh "mvn package -DskipTests=true"
                             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
-                        }
-                    },
+                        },
                 
 
                 "Parallel Build 2": {
                             sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                         }
                     
-        }
+        }}
             
                 
 
