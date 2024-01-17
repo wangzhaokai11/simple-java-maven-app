@@ -17,33 +17,38 @@ pipeline {
             }
         }
         stage("Compile Build") {
-            steps {
-                echo "This is a non-parallel stage in Compile Build"
-                sh "mvn package -DskipTests=true"
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
-            }
-        }
-        stage("Compile Build-1") {
-            stages {
-                stage("Serial Sub-stage 1") {
-                    steps {
-                        echo "This is a serial sub-stage in Compile Build-1"
-                        // 添加相应的步骤
+            parallel {
+                stage("Compile Build-1") {
+                    stages {
+                        stage("Sub-stage 1") {
+                            steps {
+                                echo "This is a sub-stage in 并行执行"
+                                // 添加相应的步骤
+                            }
+                        }
+                        stage("Sub-stage 2") {
+                            steps {
+                                echo "This is another sub-stage in 并行执行"
+                                // 添加相应的步骤
+                            }
+                        }
                     }
                 }
-                stage("Serial Sub-stage 2") {
-                    steps {
-                        echo "This is another serial sub-stage in Compile Build-1"
-                        // 添加相应的步骤
+                stage("Compile Build-2") {
+                    stages {
+                        stage("Sub-stage 1") {
+                            steps {
+                                echo "This is a sub-stage in 并行执行"
+                                // 添加相应的步骤
+                            }
+                        }
+                        stage("Sub-stage 2") {
+                            steps {
+                                echo "This is another sub-stage in 并行执行"
+                                // 添加相应的步骤
+                            }
+                        }
                     }
-                }
-            }
-        }
-        stage("Compile Build-2") {
-            steps {
-                script {
-                    echo "This is a non-parallel stage in Compile Build-2"
-                    // 添加相应的步骤
                 }
             }
         }
