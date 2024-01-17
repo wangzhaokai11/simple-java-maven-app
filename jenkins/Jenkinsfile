@@ -24,31 +24,26 @@ pipeline {
             }
         }
         stage("Compile Build-1") {
-            parallel {
-                stage("cpile-parallel-1") {
+            stages {
+                stage("Serial Sub-stage 1") {
                     steps {
-                        echo "This is a non-parallel stage in cpile-parallel-1"
-                        // 此处添加相应的步骤
-                    }
-                    steps {
-                        echo "2222222222"
-                        // 此处添加相应的步骤
+                        echo "This is a serial sub-stage in Compile Build-1"
+                        // 添加相应的步骤
                     }
                 }
-                stage("cpile-parallel-2") {
+                stage("Serial Sub-stage 2") {
                     steps {
-                        echo "This is a non-parallel stage in cpile-parallel-2"
-                        // 此处添加相应的步骤
+                        echo "This is another serial sub-stage in Compile Build-1"
+                        // 添加相应的步骤
                     }
                 }
-                // 更多并行步骤...
             }
         }
         stage("Compile Build-2") {
             steps {
                 script {
                     echo "This is a non-parallel stage in Compile Build-2"
-                    // 此处添加相应的步骤
+                    // 添加相应的步骤
                 }
             }
         }
@@ -63,15 +58,23 @@ pipeline {
                     steps {
                         script {
                             echo "This is a non-parallel stage in edoc执行"
-                            // 此处添加相应的步骤
+                            // 添加相应的步骤
                         }
                     }
                 }
                 stage("并行执行") {
-                    steps {
-                        script {
-                            echo "This is a non-parallel stage in 并行执行"
-                            // 此处添加相应的步骤
+                    stages {
+                        stage("Sub-stage 1") {
+                            steps {
+                                echo "This is a sub-stage in 并行执行"
+                                // 添加相应的步骤
+                            }
+                        }
+                        stage("Sub-stage 2") {
+                            steps {
+                                echo "This is another sub-stage in 并行执行"
+                                // 添加相应的步骤
+                            }
                         }
                     }
                 }
