@@ -18,14 +18,19 @@ pipeline {
         }
         stage("Compile Build") {
             parallel {
-                "Parallel Build 1": {
-                            sh "mvn package -DskipTests=true"
-                            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
-                        },
+                stage("Parallel Build 1") {
+                    steps {
+                        sh "mvn package -DskipTests=true"
+                        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+                    }
+                            
+                        }
                 
-
-                "Parallel Build 2": {
-                            sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                stage("Parallel Build 2") {
+                    steps {
+                         sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                    }
+                           
                         }
                     
         }}
