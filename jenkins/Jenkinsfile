@@ -31,6 +31,12 @@ pipeline {
                         sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     }
                 }
+                stage("cpile-parallel-3") {
+                    steps {
+                        echo "This is a non-parallel stage in cpile-parallel-2"
+                        sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.tar.gz"
+                    }
+                }
                 stage("Compile Build-1") {
                     steps {
                         echo "This is a non-parallel stage in Compile Build-1"
