@@ -18,24 +18,22 @@ pipeline {
         }
         stage("Compile Build") {
             parallel {
-                stage("Parallel Build 1") {
-                    steps {
-                        script {
+                "Parallel Build 1": {
                             sh "mvn package -DskipTests=true"
                             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
                         }
                     }
-                }
+                
 
-                stage("Parallel Build 2") {
-                    steps {
-                        script {
+                "Parallel Build 2": {
                             sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                         }
-                    }
-                }
-            }
+                    
         }
+            
+                
+
+
         stage("Publish to Edoc Repository Manager") {
             when {
               expression {
@@ -83,5 +81,6 @@ pipeline {
                 }
             }
           }
-        }
+        
+    }
     }
