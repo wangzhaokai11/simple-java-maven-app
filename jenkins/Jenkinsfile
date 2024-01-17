@@ -22,7 +22,7 @@ pipeline {
                             sh "mvn package -DskipTests=true"
                             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
                         }
-                    }
+                    },
                 
 
                 "Parallel Build 2": {
