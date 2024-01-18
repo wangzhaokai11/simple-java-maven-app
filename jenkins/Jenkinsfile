@@ -63,6 +63,12 @@ pipeline {
                             } 
                 }
             }
+            stage("Compile Build-4") {
+                steps {
+                        echo "编译构建串行无并"
+                                // 添加相应的步骤
+                            } 
+                }
         }
         stage("Publish to Edoc Repository Manager") {
             when {
