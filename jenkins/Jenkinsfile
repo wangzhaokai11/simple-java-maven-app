@@ -48,7 +48,7 @@ pipeline {
                                 //sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip"
                             }
                         }
-                        stage("sub-para-2-MMM") {
+                        stage("sub-para-2-3-MMM") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
                                // sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
@@ -64,7 +64,7 @@ pipeline {
                 }
               stage("cpile-parallel-4") {
                     stages {
-                        stage("sub-para-4-APP") {
+                        stage("sub-para-4-1-APP") {
                             steps {
                                 echo "This is a sub-stage in 并行执行"
                                 //sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
