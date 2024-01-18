@@ -56,19 +56,19 @@ pipeline {
                         }
                     }
                 }
-            stage("Compile Build-3") {
-                steps {
+                stage("Compile Build-3") {
+                    steps {
                         echo "This is a sub-stage in 并行执行"
-                                // 添加相应的步骤
-                            } 
+                        // 添加相应的步骤
+                    }
+                }
+                stage("Compile Build-4") {
+                    steps {
+                        echo "编译构建串行无并"
+                        // 添加相应的步骤
+                    }
                 }
             }
-            stage("Compile Build-4") {
-                steps {
-                        echo "编译构建串行无并"
-                                // 添加相应的步骤
-                            } 
-                }
         }
         stage("Publish to Edoc Repository Manager") {
             when {
@@ -86,15 +86,13 @@ pipeline {
                     }
                 }
                 stage("并行执行") {
-                            steps {
-                                echo "This is a sub-stage in 并行执行"
-                                // 添加相应的步骤
-                            }
-                        
+                    steps {
+                        echo "This is a sub-stage in 并行执行"
+                        // 添加相应的步骤
                     }
                 }
             }
-        
+        }
         stage("Finish") {
             steps {
                 script {
