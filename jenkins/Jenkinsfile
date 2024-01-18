@@ -68,23 +68,15 @@ pipeline {
                     }
                 }
                 stage("并行执行") {
-                    stages {
-                        stage("Sub-stage 1") {
                             steps {
                                 echo "This is a sub-stage in 并行执行"
                                 // 添加相应的步骤
                             }
-                        }
-                        stage("Sub-stage 2") {
-                            steps {
-                                echo "This is another sub-stage in 并行执行"
-                                // 添加相应的步骤
-                            }
-                        }
+                        
                     }
                 }
             }
-        }
+        
         stage("Finish") {
             steps {
                 script {
