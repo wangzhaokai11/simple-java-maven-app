@@ -56,7 +56,7 @@ pipeline {
                         }
                     }
                 }
-                stage("cpile-paralle-3") {
+                stage("cpile-parallel-3") {
                     steps {
                         echo "This is a sub-stage in 并行执行"
                         sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.tar.gz"
