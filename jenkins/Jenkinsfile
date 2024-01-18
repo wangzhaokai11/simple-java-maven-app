@@ -20,13 +20,13 @@ pipeline {
             parallel {
                 stage("cpile-parallel-1") {
                     stages {
-                        stage("sub-para11") {
+                        stage("sub-para1-1") {
                             steps {
                                 echo "This is a sub-stage in 并行执行"
                                 sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
                             }
                         }
-                        stage("sub-para12") {
+                        stage("sub-para1-2") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
                                 sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Mac_Portable_x86_64.dmg"
@@ -36,19 +36,19 @@ pipeline {
                 }
                 stage("cpile-parallel-2") {
                     stages {
-                        stage("sub-para21") {
+                        stage("sub-para2-1") {
                             steps {
                                 echo "This is a sub-stage in 并行执行"
                                 sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
                             }
                         }
-                        stage("sub-para22") {
+                        stage("sub-para2-2") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
                                 sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip"
                             }
                         }
-                        stage("sub-para23") {
+                        stage("sub-para2-3") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
                                 sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
