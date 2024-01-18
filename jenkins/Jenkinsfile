@@ -32,6 +32,12 @@ pipeline {
                                 // 添加相应的步骤
                             }
                         }
+                        stage("Sub-stage 3") {
+                            steps {
+                                echo "This is another sub-stage in 并行执行"
+                                // 添加相应的步骤
+                            }
+                        }
                     }
                 }
                 stage("Compile Build-2") {
@@ -50,6 +56,14 @@ pipeline {
                         }
                     }
                 }
+            stage("Compile Build-3") {
+                            steps {
+                                echo "This is a sub-stage in 并行执行"
+                                // 添加相应的步骤
+                            }
+    
+                            }
+                        }
             }
         }
         stage("Publish to Edoc Repository Manager") {
@@ -85,4 +99,4 @@ pipeline {
             }
         }
     }
-}
+
