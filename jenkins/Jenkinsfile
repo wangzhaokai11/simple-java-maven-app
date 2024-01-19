@@ -59,7 +59,7 @@ pipeline {
                                }
                 }}
                             }
-                        }
+                        
                         stage("sub-para-2-2-CCC") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
@@ -72,7 +72,7 @@ pipeline {
                              //  sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
                             }
                         }
-                    }
+                    }}
                 
                 stage("cpile-parallel-3") {
                     steps {
