@@ -79,7 +79,7 @@ pipeline {
                                 sh "./single-edoc.sh only_upload ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar 1377193"
                             }
                         }
-                    }}
+                    }}}
                 
                 stage("cpile-parallel-3") {
                     steps {
@@ -103,7 +103,7 @@ pipeline {
                         }
                     }
                 }  
-            }}}
+            }}
                 stage("Compile Build-4") {
                     steps {
                         echo "编译构建串行无并"
@@ -142,9 +142,7 @@ pipeline {
                     echo "流水线执行完成"
                 }
             }
-        }
+        }}
         
         }
         
-        }
-    
