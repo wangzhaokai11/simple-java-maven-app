@@ -22,8 +22,11 @@ pipeline {
                     stages {
                         stage("sub-para-1-1-MCU") {
                             steps {
-                                echo "This is a sub-stage in 并行执行"
-                                //sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
+                                script {
+                                    sh "mvn package -DskipTests=true"
+                                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+
+                }
                             }
                         }
                         stage("sub-para-1-2-XXX") {
@@ -38,8 +41,23 @@ pipeline {
                     stages {
                         stage("sub-para-2-1-QNX") {
                             steps {
-                                echo "This is a sub-stage in 并行执行"
-                              // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
+                                script {
+
+                    // echo '执行edoc上传'
+                    def tarFile = "./edoc.tar.gz"
+                    def downloadNeeded = !fileExists(tarFile)
+
+                    // 如果文件不存在，则下载
+                    if (downloadNeeded) {
+                        sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                    }
+                    sh "tar -zxvf edoc.tar.gz"
+
+                    dir('edoc-new'){
+                    sh "ls"
+                    sh "./pipeline-edoc.sh wangzkjenkins 1377193 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
+                               }
+                }}
                             }
                         }
                         stage("sub-para-2-2-CCC") {
@@ -55,7 +73,7 @@ pipeline {
                             }
                         }
                     }
-                }
+                
                 stage("cpile-parallel-3") {
                     steps {
                         echo "This is a sub-stage in 并行执行"
@@ -118,5 +136,4 @@ pipeline {
                 }
             }
         }
-    }
-}
+    }}
