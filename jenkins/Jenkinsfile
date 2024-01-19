@@ -23,13 +23,13 @@ pipeline {
                         stage("sub-para-1-1-MCU") {
                             steps {
                                 echo "This is a sub-stage in 并行执行"
-                                sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
+                                //sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
                             }
                         }
                         stage("sub-para-1-2-XXX") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
-                               sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Mac_Portable_x86_64.dmg"
+                              // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Mac_Portable_x86_64.dmg"
                             }
                         }
                     }
@@ -39,19 +39,19 @@ pipeline {
                         stage("sub-para-2-1-QNX") {
                             steps {
                                 echo "This is a sub-stage in 并行执行"
-                               sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
+                              // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_32.zip"
                             }
                         }
                         stage("sub-para-2-2-CCC") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
-                                sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip"
+                               // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip"
                             }
                         }
                         stage("sub-para-2-3-MMM") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
-                               sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
+                             //  sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
                             }
                         }
                     }
@@ -59,7 +59,7 @@ pipeline {
                 stage("cpile-parallel-3") {
                     steps {
                         echo "This is a sub-stage in 并行执行"
-                        sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.tar.gz"
+                       // sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.tar.gz"
                     }
                 }
               stage("cpile-parallel-4") {
@@ -67,13 +67,13 @@ pipeline {
                         stage("sub-para-4-1-APP") {
                             steps {
                                 echo "This is a sub-stage in 并行执行"
-                                sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
+                              //  sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Linux_Portable_x86_64.tar.gz"
                             }
                         }
                         stage("sub-para-4-2-AN") {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
-                                 sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Mac_Portable_x86_64.dmg"
+                             //    sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Mac_Portable_x86_64.dmg"
                             }
                         }
                     }
@@ -82,7 +82,7 @@ pipeline {
                 stage("Compile Build-4") {
                     steps {
                         echo "编译构建串行无并"
-                        sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                    //    sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
                     }
                 }
             
