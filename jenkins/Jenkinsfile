@@ -104,7 +104,7 @@ pipeline {
                         }
                     }
                 }  
-            }}
+           
                 stage("Compile Build-4") {
                     steps {
                         echo "编译构建串行无并"
@@ -145,5 +145,5 @@ pipeline {
             }
         }}
         
-        }
+    
         
