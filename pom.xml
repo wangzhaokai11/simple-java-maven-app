@@ -18,6 +18,18 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  
+      <distributionManagement>
+        <snapshotRepository>
+            <id>nexus</id>
+            <url>http://10.219.66.215:8081/repository/maven-public/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus</id>
+            <url>http://10.219.66.215:8081/repository/maven-public/</url>
+        </repository>
+    </distributionManagement>
+
   <build>
     <pluginManagement>
       <plugins>
