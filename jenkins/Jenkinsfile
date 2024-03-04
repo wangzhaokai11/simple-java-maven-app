@@ -36,24 +36,6 @@ pipeline {
                         }
                     }
                 }
-                stage("cpile-parallel-2") {
-                    stages {
-                        stage("sub-para-2-1-QNX") {
-                            steps {
-                                script {
-                                }
-                            }
-                        }
-                        stage("sub-para-2-2-CCC") {
-                            steps {
-                            }
-                        }
-                        stage("sub-para-2-3-MMM") {
-                            steps {
-                            }
-                        }
-                    }
-                }
                 stage("cpile-parallel-3") {
                     steps {
                         echo "This is a sub-stage in 并行执行"
