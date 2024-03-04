@@ -45,18 +45,18 @@ pipeline {
                                 script {
 
                     // echo '执行edoc上传'
-                    def tarFile = "./edoc.tar.gz"
-                    def downloadNeeded = !fileExists(tarFile)
+                    // def tarFile = "./edoc.tar.gz"
+                    // def downloadNeeded = !fileExists(tarFile)
 
-                    // 如果文件不存在，则下载
-                    if (downloadNeeded) {
-                        sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
-                    }
-                    sh "tar -zxvf edoc.tar.gz"
+                    // // 如果文件不存在，则下载
+                    // if (downloadNeeded) {
+                    //     sh "wget https://edoc-1316692706.cos.ap-guangzhou.myqcloud.com/edoc.tar.gz"
+                    // }
+                    // sh "tar -zxvf edoc.tar.gz"
 
-                    dir('edoc'){
-                    sh "ls"
-                    sh "./pipeline-edoc.sh wangzkjenkins 1377193 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
+                    // dir('edoc'){
+                    // sh "ls"
+                    // sh "./pipeline-edoc.sh wangzkjenkins 1377193 ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.WORKSPACE}"
                                }
                 }}
                             }
@@ -65,9 +65,9 @@ pipeline {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
                                // sh "wget https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip"
-                                dir('edoc'){
-                                sh "ls"
-                                sh "./single-edoc.sh only_create_folder wangzktest011119 1377193"
+                                // dir('edoc'){
+                                // sh "ls"
+                                // sh "./single-edoc.sh only_create_folder wangzktest011119 1377193"
                                }
                             }
                         }
@@ -75,9 +75,9 @@ pipeline {
                             steps {
                                 echo "This is another sub-stage in 并行执行"
                              //  sh "wget https://github.com/kingToolbox/WindTerm/archive/refs/tags/2.5.0.zip"
-                                dir('edoc'){
-                                sh "ls"
-                                sh "./single-edoc.sh only_upload ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar 1377193"
+                                // dir('edoc'){
+                                // sh "ls"
+                                // sh "./single-edoc.sh only_upload ${env.WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar 1377193"
                             }
                         }
                     }}}
