@@ -23,6 +23,7 @@ pipeline {
                         stage("sub-para-1-1-MCU") {
                             steps {
                                 script {
+                                    sh "rm -rf /root/.m2/repository/*"
                                     sh "mvn package -DskipTests=true"
                                     archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
 
