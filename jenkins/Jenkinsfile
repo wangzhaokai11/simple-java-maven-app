@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'docker.desaysv.com/ici2/tools/maven:my-nexus-proxy'
-            args '-v /root/.m2:/root/.m2'
         }
     }
     environment {
